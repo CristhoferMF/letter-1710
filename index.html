@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para ti 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    iframe {
+      width: 90%;
+      max-width: 400px;
+      height: 70vh;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones flotando */
+    .heart {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(0.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="message">Aún no puedes verlo... pero falta poco ❤️</h1>
+  <div id="video-container" style="display: none;">
+    <h1>Esto es para ti 💕</h1>
+    <iframe
+      src="https://www.youtube.com/embed/q4M3h1l7qfY"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    const unlockTime = new Date("2025-10-18T02:00:00Z"); // 21:00 hora Perú (UTC-5)
+    const message = document.getElementById("message");
+    const videoContainer = document.getElementById("video-container");
+
+    function checkTime() {
+      const now = new Date();
+      if (now >= unlockTime) {
+        message.style.display = "none";
+        videoContainer.style.display = "block";
+      } else {
+        setTimeout(checkTime, 1000);
+      }
+    }
+    checkTime();
+
+    // Crear corazones flotantes 💖
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
